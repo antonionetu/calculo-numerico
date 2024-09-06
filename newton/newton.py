@@ -12,7 +12,6 @@ def newton(x):
     if MODULO(FUNCAO(x)) < PRECISAO:
         return x
 
-    print(x, MODULO(FUNCAO(x+1)))
     return newton(formula(x))
     
 

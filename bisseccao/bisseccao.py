@@ -1,4 +1,4 @@
-TERACOES = 0
+ITERACOES = 0
 
 def ponto_medio(a, b):
     return (a+b)/2

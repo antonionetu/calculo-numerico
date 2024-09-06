@@ -1,5 +1,3 @@
-ITERACOES = 0
-
 def ponto_medio(a, b):
     return (a+b)/2
 
@@ -16,7 +14,6 @@ def bolzano(a, b):
 
 def bisseccao(a, b):
     pm = ponto_medio(a, b)
-    ITERACOES += 1
 
     if modulo(FUNCAO(pm)) <= PRECISAO:
         return pm
@@ -30,7 +27,7 @@ def bisseccao(a, b):
 EULER = 2.71
 
 # Precisao
-PRECISAO = 10 ** (-9)
+PRECISAO = 10 ** (-3)
 
 # Funcao
 def FUNCAO(x):
@@ -38,5 +35,5 @@ def FUNCAO(x):
 
 
 # Resultado
-print(bisseccao(-10000, 10000))
-print(ITERACOES)
+print(bisseccao(-100, 100))
+

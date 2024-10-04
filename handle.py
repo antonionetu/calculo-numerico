@@ -1,14 +1,4 @@
-# Constantes
-# ...
-PRECISAO = 10 ** (-10)
-
-# Funcoes
-def FUNCAO(x):
-    ...
-
-
-def DERIVADA_FUNCAO(x):
-    ...
+PRECISAO_PADRAO = 10 ** (-3)
 
 
 def modulo(num):
@@ -18,50 +8,55 @@ def modulo(num):
 
 
 class Newton:
-    @staticmethod
-    def formula(x):
-        return x - (FUNCAO(x) / DERIVADA_FUNCAO(x))
+    def __init__(this, **kwargs):
+        this.funcao = kwargs.get('funcao')
+        this.derivada_funcao = kwargs.get('derivada_funcao')
+        this.precisao = kwargs.get('precisao', PRECISAO_PADRAO)
+        
+    def formula(this, x):
+        return x - (this.funcao(x) / this.derivada_funcao(x))
 
-    def metodo(self, CHUTE):
-        if modulo(FUNCAO(CHUTE)) < PRECISAO:
+    def metodo(this, CHUTE):
+        if modulo(this.funcao(CHUTE)) < this.precisao:
             return CHUTE
-        return self.metodo(self.formula(CHUTE))
+        return this.metodo(this.formula(CHUTE))
 
 
 class Bisseccao:
+    def __init__(this, **kwargs):
+        this.funcao = kwargs.get('funcao')
+        this.precisao = kwargs.get('precisao', PRECISAO_PADRAO)
+
     @staticmethod
     def ponto_medio(a, b):
         return (a + b) / 2
 
-    @staticmethod
-    def bolzano(a, b):
-        return FUNCAO(a) * FUNCAO(b) < 0
+    def bolzano(this, a, b):
+        return this.funcao(a) * this.funcao(b) < 0
 
-    def metodo(self, a, b):
-        pm = self.ponto_medio(a, b)
-        if modulo(FUNCAO(pm)) <= PRECISAO:
+    def metodo(this, a, b):
+        pm = this.ponto_medio(a, b)
+        if modulo(this.funcao(pm)) <= this.precisao:
             return pm
 
-        if self.bolzano(a, pm):
-            return self.metodo(a, pm)
-        return self.metodo(pm, b)
+        if this.bolzano(a, pm):
+            return this.metodo(a, pm)
+        return this.metodo(pm, b)
 
 
 class Secante:
-    @staticmethod
-    def formula(a, b):
-        return b - FUNCAO(b) * (
+    def __init__(this, **kwargs):
+        this.funcao = kwargs.get('funcao')
+        this.precisao = kwargs.get('precisao', PRECISAO_PADRAO)
+
+    def formula(this, a, b):
+        return b - this.funcao(b) * (
             (b - a) 
             / 
-            (FUNCAO(b) - FUNCAO(a))
+            (this.funcao(b) - this.funcao(a))
         )
 
-    def metodo(self, a, b):
-        if modulo(FUNCAO(b)) < PRECISAO:
+    def metodo(this, a, b):
+        if modulo(this.funcao(b)) < this.precisao:
             return b
-        return self.metodo(b, self.formula(a, b))
-
-
-bisseccao = Bisseccao()
-newton = Newton()
-secante = Secante()
+        return this.metodo(b, this.formula(a, b))

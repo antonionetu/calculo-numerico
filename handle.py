@@ -4,11 +4,11 @@ PRECISAO = 10 ** (-10)
 
 # Funcoes
 def FUNCAO(x):
-    return (2 * x) - x ** 2
+    ...
 
 
 def DERIVADA_FUNCAO(x):
-    return 2 - 2 * x
+    ...
 
 
 def modulo(num):
